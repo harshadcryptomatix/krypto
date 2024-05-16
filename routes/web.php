@@ -10,10 +10,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->middleware('verified')->name('home');
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware('verified')->name('home');
 
 Route::controller(VerificationController::class)->middleware('auth')->group(function() {
     Route::get('/email/verify', 'notice')->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', 'verify')->middleware(['signed'])->name('verification.verify');
     Route::post('/email/verification-notification', 'resend')->middleware(['throttle:6,1'])->name('verification.resend');
+
+    Route::view('dashboard', 'admin.dashboard');
 });

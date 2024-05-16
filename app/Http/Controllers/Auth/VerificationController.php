@@ -28,7 +28,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -48,13 +48,13 @@ class VerificationController extends Controller
             return view('auth.verify');
         }
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
     
     public function verify(EmailVerificationRequest $request) {
         $request->fulfill();
      
-        return redirect('/home');
+        return redirect('/dashboard');
     }
     
     public function resend(Request $request) {
