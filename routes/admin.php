@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\AdminLoginController;
 
 Route::get('/', function () {
   return redirect('admin/dashboard');
-})->name('admin.dashboard');
+});
 
 Route::match(['get','post'],'login',[AdminLoginController::class, 'login'])->name('admin.login');
 Route::post('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
