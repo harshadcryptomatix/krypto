@@ -27,3 +27,8 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
+//admin routes attach with admin.php file
+Route::prefix('admin')->group(function () {
+    require base_path('routes/admin.php');
+});
