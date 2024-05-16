@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
 <div class="container">
@@ -10,7 +10,7 @@
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                  <span class="d-none d-lg-block">Krypto</span>
                 </a>
               </div><!-- End Logo -->
   
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                       
-                        <div class="col-12">
+                        <div class="col-12 mb-3">
                             <label for="yourUsername" class="form-label">Email</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="row col-12">
                             <label for="yourUsername" class="form-label">Mobile No.</label>
 
                             <div class="col-md-4">
