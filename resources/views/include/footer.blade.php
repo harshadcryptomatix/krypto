@@ -1,4 +1,4 @@
-</body>
+
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -30,5 +30,4 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
 
-
-</html>
+@stack('scripts')
