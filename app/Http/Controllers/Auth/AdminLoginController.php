@@ -19,13 +19,16 @@ class AdminLoginController extends Controller
                 'password' => 'required',
             ]);
             $credentials = $request->only('email', 'password');
+           
             if (Auth::guard('admin')->attempt($credentials)) {
+              
                 if(!Auth::guard('admin')->user()->status){
                        Auth::guard('admin')->logout();
                        return back()->with('error','Your account is suspended');
                 }
-                return redirect()->intended('/admin/dashboard');
+                return redirect()->route('admin.dashboard');
             }
+            die('not match');
             return redirect()->route('admin.login')->with('error', 'Invalid credentials');
         }
         return view('admin.login');

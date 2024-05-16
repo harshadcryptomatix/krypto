@@ -30,12 +30,12 @@
 
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                 {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
-                <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : Auth::guard('web')->user()->name }}</span>
             </a><!-- End Profile Iamge Icon -->
 
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li class="dropdown-header">
-                <h6>{{ Auth::user()->name }}</h6>
+                <h6>{{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : Auth::guard('web')->user()->name }}</h6>
                 </li>
                 <li>
                 <hr class="dropdown-divider">
@@ -72,7 +72,11 @@
                 </li> --}}
 
                 <li>
-                    <form action="{{ route('logout') }}" method="POST" class="form-inline">
+                @if(Auth::guard('admin')->check())    
+                    <form action="{{ route('admin.logout') }}" method="POST" class="form-inline">
+                @else
+                   <form action="{{ route('logout') }}" method="POST" class="form-inline">
+                @endif
                         @csrf
                         {{-- <i class="bi bi-box-arrow-right"></i> --}}
                         <input type="submit" class="dropdown-item d-flex align-items-center" value="Sign Out">
