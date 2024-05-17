@@ -1,13 +1,5 @@
 @extends('admin.layouts.app')
-
 @section('content')
-    
-<body>
-
-  @include('admin.include.sidebar')
-
-  <main id="main" class="main">
-
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
@@ -651,13 +643,4 @@
 
       </div>--}}
     </section>
-
-  </main><!-- End #main -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-</body>
-
-</html>
-
 @endsection
