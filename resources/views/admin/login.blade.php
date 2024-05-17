@@ -42,14 +42,18 @@
                   <p class="text-center small">Enter your username & password to login</p>
                 </div>
                 @if (session()->has('error'))
-                  <div class="alert alert-danger" role="alert">
-                       {{ session('error') }}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-octagon me-1"></i>
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                 @endif
                 @if (session()->has('success'))
-                  <div class="alert alert-success" role="alert">
-                       {{ session('success') }}
-                  </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <i class="bi bi-check-circle me-1"></i>
+                      {{ session('success') }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
 
                 <form method="POST" action="{{ route('admin.login') }}" class="row g-3 needs-validation">

@@ -1,0 +1,7 @@
+.admin-button{
+    float: right;
+    margin-bottom: 14px;
+}
+.invalid-feedback{
+      display: block;
+}
