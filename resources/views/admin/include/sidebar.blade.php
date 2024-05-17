@@ -19,12 +19,12 @@
         <ul id="components-nav" class="nav-content collapse @if(Request::is('*admin-users*')) show @endif" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{route('admin.admin-list')}}" @if (Request::is('*admin-users*')) class="active"  @endif>
-              <i class="bi bi-circle"></i><span>Admins</span>
+              <i class="bi bi-circle"></i><span>{{__('Admins')}}</span>
             </a>
           </li>
           <li>
             <a href="javascript:void(0)">
-              <i class="bi bi-circle"></i><span>Merchants</span>
+              <i class="bi bi-circle"></i><span>{{__('Merchants')}}</span>
             </a>
           </li>
          
