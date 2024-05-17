@@ -12,7 +12,7 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.bunny.net">
 
-        @include('include.styles')
+        @include('admin.include.styles')
         
         @stack('styles')
         
