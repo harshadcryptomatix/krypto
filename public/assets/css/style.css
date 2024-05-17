@@ -390,6 +390,9 @@ h6 {
   min-width: 360px;
   padding: 0 20px;
 }
+.ml-12{
+    margin-left: 12px;
+}
 
 @media (max-width: 1199px) {
   .header .search-bar {

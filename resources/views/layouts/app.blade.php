@@ -28,7 +28,12 @@
             @yield('content')
         </div>
 
-    @include('include.footer')
+        
+        @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
+            @include('include.footer')
+        @endif
+
+        @include('include.scripts')
 
     </body>
 

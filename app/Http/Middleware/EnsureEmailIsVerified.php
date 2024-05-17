@@ -23,7 +23,6 @@ class EnsureEmailIsVerified
             }
 
             Auth::logout();
-            
             return redirect()->route('login')->with('success', 'Your account has been registered successfully. You will receive an email shortly to activate your account.');
         }
 
