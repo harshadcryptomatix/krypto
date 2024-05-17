@@ -11,6 +11,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Auth::routes();
+Route::view('login', 'auth.login')->name('login');
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
