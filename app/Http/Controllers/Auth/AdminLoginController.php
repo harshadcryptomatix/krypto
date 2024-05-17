@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 
 class AdminLoginController extends Controller
 {
@@ -19,7 +20,10 @@ class AdminLoginController extends Controller
                 'password' => 'required',
             ]);
             $credentials = $request->only('email', 'password');
-           
+            $check_email = Admin::where('email',$request->email)->exists();
+            if(!$check_email){
+                return redirect()->route('admin.login')->with('error', 'Wrong email address try again.');
+            }
             if (Auth::guard('admin')->attempt($credentials)) {
               
                 if(!Auth::guard('admin')->user()->status){
@@ -28,8 +32,7 @@ class AdminLoginController extends Controller
                 }
                 return redirect()->route('admin.dashboard');
             }
-            die('not match');
-            return redirect()->route('admin.login')->with('error', 'Invalid credentials');
+            return redirect()->route('admin.login')->with('error', 'Wrong password try again.');
         }
         return view('admin.login');
     }

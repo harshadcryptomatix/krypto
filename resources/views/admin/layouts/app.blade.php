@@ -19,17 +19,17 @@
         
     </head>
     <body>
-
-        @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
+        @if (Auth::guard('admin')->check())
             @include('admin.include.header')
         @endif
-        
         <div id="app">
-            @yield('content')
+            <main id="main" class="main">
+            @include('admin.include.sidebar')
+               @yield('content')
+            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+            </main><!-- End #main -->
         </div>
-
-    @include('include.footer')
-
+        @include('admin.include.footer')
     </body>
 
 </html>
