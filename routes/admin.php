@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\AdminLoginController;
 
 Route::get('/', function () {
   return redirect('admin/dashboard');
-})->name('admin.dashboard');
+});
 
 Route::match(['get','post'],'login',[AdminLoginController::class, 'login'])->name('admin.login');
 Route::post('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
@@ -21,4 +21,5 @@ Route::post('logout', [AdminLoginController::class, 'logout'])->name('admin.logo
 // Authenticated admin routes
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard', [AdminLoginController::class, 'index'])->name('admin.dashboard');
+    Route::resource('admin-users', App\Http\Controllers\Admin\AdminController::class);
 });

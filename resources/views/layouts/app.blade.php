@@ -20,7 +20,7 @@
     </head>
     <body>
 
-        @if (Auth::check())
+        @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
             @include('include.header')
         @endif
         
