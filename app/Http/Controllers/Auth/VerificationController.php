@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Auth;
+use Laravel\Fortify\Http\Requests\VerifyEmailRequest;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use Illuminate\Auth\Events\Verified;
+use Auth, Session;
 
 class VerificationController extends Controller
 {
@@ -42,10 +44,19 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    function __invoke(EmailVerificationRequest $request) {
-        $request->fulfill();
-
+    function __invoke(VerifyEmailRequest $request) {
      
+        // dd($request->user()->markEmailAsVerified());
+        if ($request->user()->hasVerifiedEmail()) {
+            return app(VerifyEmailResponse::class);
+        }
+
+        if ($request->user()->markEmailAsVerified()) {
+            event(new Verified($request->user()));
+        }
+
+        return app(VerifyEmailResponse::class);
+
         return redirect()->route('dashboard');
     }
 
@@ -58,12 +69,13 @@ class VerificationController extends Controller
         return redirect()->route('dashboard');
     }
     
-    public function verify(EmailVerificationRequest $request) {
-        // dd("hwerr");
-        $request->fulfill();
-
+    public function verify(VerifyEmailRequest $request) {
+        $request->user()->markEmailAsVerified();
+        
+        Auth::logout();
      
-        return redirect()->route('dashboard');
+        Session::flash('success', 'Your account has been verified. Please continue to sign in.');
+        return redirect()->route('login');
     }
     
     public function resend(Request $request) {

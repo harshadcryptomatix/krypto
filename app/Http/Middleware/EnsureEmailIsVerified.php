@@ -17,7 +17,6 @@ class EnsureEmailIsVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd("hereee");
         if (Auth::check() && !$request->user()->hasVerifiedEmail()) {
             if ($request->expectsJson()) {
                 return response()->json(['message' => 'Your account has been registered successfully. You will receive an email shortly to activate your account.'], 403);

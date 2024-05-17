@@ -37,10 +37,10 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        $this->app->singleton(
-            \Laravel\Fortify\Http\Controllers\VerifyEmailController::class,
-            \App\Http\Controllers\Auth\VerificationController::class
-        );
+        // $this->app->singleton(
+        //     \Laravel\Fortify\Http\Controllers\VerifyEmailController::class,
+        //     \App\Http\Controllers\Auth\VerificationController::class
+        // );
         
     
     }
