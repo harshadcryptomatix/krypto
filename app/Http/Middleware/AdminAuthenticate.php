@@ -10,7 +10,7 @@ class AdminAuthenticate
 {
     public function handle(Request $request, Closure $next)
     {
-    
+   
         if (Auth::guard('admin')->check()) {
             $user = auth()->guard('admin')->user();
         

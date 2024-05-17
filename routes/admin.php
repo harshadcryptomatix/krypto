@@ -33,6 +33,5 @@ Route::middleware(['admin'])->group(function () {
       'edit' => 'admin.admin-edit',
       'update' => 'admin.admin-update'
     ]);
-    Route::get('merchants', [MerchantController::class, 'index'])->name('admin.dashboard');
-    Route::resource('admin-users', App\Http\Controllers\Admin\AdminController::class);
+    Route::get('merchants', [MerchantController::class, 'index']);
 });
