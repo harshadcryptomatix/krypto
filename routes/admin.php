@@ -4,6 +4,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\MerchantController;
+use App\Http\Controllers\Admin\ApplicationController;
+
 
 
 /*
@@ -23,7 +25,11 @@ Route::post('logout', [AdminLoginController::class, 'logout'])->name('admin.logo
 // Authenticated admin routes
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard', [AdminLoginController::class, 'index'])->name('admin.dashboard');
-    Route::get('merchants', [MerchantController::class, 'index'])->name('admin.dashboard');
+    Route::get('merchants', [MerchantController::class, 'index'])->name('admin.merchants');
+
+
+    Route::get('merchant-applications', [ApplicationController::class, 'index'])->name('admin.merchantapplications');
+
 
     Route::resource('admin-users', App\Http\Controllers\Admin\AdminController::class);
 });
