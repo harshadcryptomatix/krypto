@@ -42,6 +42,13 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
+    function __invoke(EmailVerificationRequest $request) {
+        $request->fulfill();
+
+     
+        return redirect()->route('dashboard');
+    }
+
     public function notice() {
 
         if(!Auth::user()->hasVerifiedEmail()) {   
@@ -52,9 +59,11 @@ class VerificationController extends Controller
     }
     
     public function verify(EmailVerificationRequest $request) {
+        // dd("hwerr");
         $request->fulfill();
+
      
-        return redirect('/dashboard');
+        return redirect()->route('dashboard');
     }
     
     public function resend(Request $request) {

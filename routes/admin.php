@@ -3,6 +3,8 @@
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\MerchantController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,7 @@ Route::post('logout', [AdminLoginController::class, 'logout'])->name('admin.logo
 // Authenticated admin routes
 Route::middleware(['admin'])->group(function () {
     Route::get('dashboard', [AdminLoginController::class, 'index'])->name('admin.dashboard');
+
     Route::resource('admin-users', App\Http\Controllers\Admin\AdminController::class)
     ->names([
       'index' =>'admin.admin-list',
@@ -30,4 +33,6 @@ Route::middleware(['admin'])->group(function () {
       'edit' => 'admin.admin-edit',
       'update' => 'admin.admin-update'
     ]);
+    Route::get('merchants', [MerchantController::class, 'index'])->name('admin.dashboard');
+    Route::resource('admin-users', App\Http\Controllers\Admin\AdminController::class);
 });
