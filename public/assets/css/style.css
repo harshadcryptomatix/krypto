@@ -1226,3 +1226,9 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+.invalid-feedback{
+     display: block;
+}
+.margin-left-94{
+    margin-left: 94%;
+}
