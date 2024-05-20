@@ -81,8 +81,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-4 label">{{__('Default Currency')}}</div>
-                            @php  $currency_details = getCurrency($data->default_currency); @endphp
-                            <div class="col-lg-9 col-md-8">{{$currency_details['name']}} ({{$currency_details['symbol']}})</div>
+                            <div class="col-lg-9 col-md-8">{{$data->default_currency}}</div>
                         </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-4 label">{{__('Status')}}</div>

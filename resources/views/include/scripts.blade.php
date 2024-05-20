@@ -13,4 +13,10 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
 
+  <!-- jquery -->
+  <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}" ></script>
+
+  <!-- select 2 js -->
+  <script src="{{ asset('assets/js/select2.min.js')}}"></script>
+
 @stack('scripts')

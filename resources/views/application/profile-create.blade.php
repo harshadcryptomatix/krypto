@@ -75,15 +75,14 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                <select name="country" class="form-select" id="countries" aria-label="Country" required>
+                          
+                                <select name="country" class="form-select select2" id="countries" aria-label="Country" required>
                                 <option  value="" selected>{{__('Select Country')}}</option>
                                 @foreach($countries ?? [] as $key => $value) 
                                   <option {{ old('country') == $key ? 'selected':'' }} value="{{$key}}">{{$value['name']}}</option>
                                 @endforeach
                                 </select>
-                                <label for="countries">{{__('Country')}}</label>
-                                </div>
+                               
                                 @error('country')
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -144,16 +143,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="default_currency" id="default_currency" aria-label="Default Currency" required>
+                                    <select class="form-select select2" name="default_currency" id="default_currency" aria-label="Default Currency" required>
                                     <option selected value="">{{__('Default Currency')}}</option>
                                     @foreach($currencies ?? [] as $key => $value)
-                                    <option {{ old('default_currency') == $key ? 'selected':'' }} value="{{$key}}">{{$value['name']}} ({{$value['symbol']}})</option>
+                                      <option {{ old('default_currency') == $key ? 'selected':'' }} value="{{$key}}">{{$key}}</option>
                                     @endforeach 
-                                    
                                     </select>
-                                    <label for="default_currency">{{__('Default Currency')}}</label>
-                                </div>
                                 @error('default_currency')
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -170,5 +165,50 @@
             </div>
         </section>    
     </main>
+    @section('scripts')
+    <script>
+       $(document).ready(function() {
+            $('.select2').select2();
+            // Bootstrap validation script
+            (function () {
+                'use strict';
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation');
 
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                            // Manually trigger validation for Select2
+                            $('.select2').each(function() {
+                                if (!$(this).val()) {
+                                    $(this).siblings('.select2-container').find('.select2-selection--single')
+                                        .addClass('is-invalid').removeClass('is-valid');
+                                } else {
+                                    $(this).siblings('.select2-container').find('.select2-selection--single')
+                                        .addClass('is-valid').removeClass('is-invalid');
+                                }
+                            });
+                        }, false);
+                    });
+
+                // Handle change event for Select2 to toggle valid/invalid classes
+                $('.select2').on('change', function() {
+                    if ($(this).val()) {
+                        $(this).siblings('.select2-container').find('.select2-selection--single')
+                            .addClass('is-valid').removeClass('is-invalid');
+                    } else {
+                        $(this).siblings('.select2-container').find('.select2-selection--single')
+                            .addClass('is-invalid').removeClass('is-valid');
+                    }
+                });
+            })();
+        });
+    </script>
+    @endsection
 @endsection
