@@ -22,9 +22,9 @@
 
         @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
             @include('include.header')
+            @include('include.sidebar')
         @endif
 
-        @include('include.sidebar')
         
         <div id="app">
             @yield('content')
