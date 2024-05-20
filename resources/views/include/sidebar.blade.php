@@ -4,16 +4,16 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('dashboard') }}">
+        <a class="nav-link @if (!Request::is('*dashboard*')) collapsed @endif" href="{{ route('dashboard') }}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>{{__('Dashboard')}}</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="#">
-          <i class="bi bi-grid"></i>
-          <span>Profile</span>
+        <a class="nav-link @if (!Request::is('*profile-info*')) collapsed @endif" href="{{ route('profile.details')}}">
+        <i class="ri-account-circle-fill"></i>
+          <span>{{__('Profile')}}</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
