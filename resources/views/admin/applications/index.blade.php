@@ -30,13 +30,8 @@
               <th><b>S No.</b></th>
               <th><b>First Name</b></th>
               <th><b>Last Name</b></th>
-              <th><b>DOB</b></th>
-              <th> <b>Gender</b></th>
+              <th><b>Email</b></th>
               <th> <b>Country</b></th>
-              <th><b>State</b></th>
-              <th><b>City</b></th>
-              <th><b>Address</b></th>
-              <th> <b>Zip Code</b></th>
               <th> <b>Default Currency</b></th>
               <th> <b>Status</b></th>
 
@@ -52,13 +47,8 @@
               <td>{{ $loop->iteration }}</td>
                 <td>{{ $application->first_name }}</td>
                 <td>{{ $application->last_name }}</td>
-                <td>{{ $application->dob }}</td>
-                <td>{{ $application->gender }}</td>
+                <td>{{ $application?->user?->email }}</td>
                 <td>{{ $application->country }}</td>
-                <td>{{ $application->state }}</td>
-                <td>{{ $application->city }}</td>
-                <td>{{ $application->address }}</td>
-                <td>{{ $application->zip_code }}</td>
                 <td>{{ $application->default_currency }}</td>
                 <td>{{ $application->status }}</td>
 
