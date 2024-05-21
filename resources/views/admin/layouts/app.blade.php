@@ -30,6 +30,7 @@
             </main><!-- End #main -->
         </div>
         @include('admin.include.footer')
+        @yield('scripts')
     </body>
 
 </html>
