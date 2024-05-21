@@ -28,6 +28,7 @@ class RegisterController extends Controller
         try {
             $user->sendEmailVerificationNotification();
         } catch (\Exception $e) {
+            \Log::error($e->getMessage());
             // If SMTP fails, delete the user and throw an error
             $user->delete();
             throw ValidationException::withMessages([
@@ -59,10 +60,8 @@ class RegisterController extends Controller
 
         $token_api = $user->createToken(config("app.name"))->plainTextToken;
 
-        \Log::info([$token_api]);
         $user->update(['api_key' => $token_api]);
 
         return $user;
-        
     }
 }

@@ -20,19 +20,18 @@
               <div class="card-body">
                 
                 <div class="pt-2 pb-2">
-                  <h5 class="card-title text-center pb-0 fs-4">Sign In</h5>
+                  <h5 class="card-title text-center pb-0 fs-4">Sign In</h5>                  
+                </div>
 
-                  @if($errors->any())
-                    {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
-                  @endif
+                @if($errors->any())
+                  {!! implode('', $errors->all('<div class="alert alert-danger alert-dismissible fade show alert-danger"><i class="bi bi-exclamation-octagon me-1"></i>:message<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')) !!}
+                @endif
                   
                   @if (Session::has('success'))
                     <div class="alert alert-success">
                       {{ Session::get('success') }}
                     </div>
                   @endif
-                  
-                </div>
 
                 <form method="POST" action="{{ route('login') }}" class="row g-3 needs-validation">
                     @csrf
@@ -41,12 +40,6 @@
                     <label for="yourUsername" class="form-label">Email Address</label>
                     <div class="input-group has-validation">
                         <input type="email" name="email" class="form-control" id="email" placeholder="E-mail" required>
-                        
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                       {{-- <div class="invalid-feedback">Please enter your username.</div> --}}
                     </div>
                   </div>
@@ -54,14 +47,8 @@
                   <div class="col-12">
                     <label for="yourPassword" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="yourPassword" placeholder="Password" required>
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                     
-                    <div class="invalid-feedback">Please enter your password!</div>
+                    {{-- <div class="invalid-feedback">Please enter your password!</div> --}}
                   </div>
 
                   <div class="col-12">

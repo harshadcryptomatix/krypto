@@ -21,6 +21,12 @@
                     {{ Session::get('success') }}
                   </div>
                 @endif
+
+                @if (Session::has('error'))
+                  <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                  </div>
+                @endif
                 
               </div>
 
@@ -30,40 +36,16 @@
                 <div class="col-12">
                   <label for="oldPassword" class="form-label">Old Password</label>
                   <input type="password" name="old_password" class="form-control" id="oldPassword" placeholder="Old Password" required>
-
-                  @error('old_password')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-                  
-                  <div class="invalid-feedback">Please enter your password!</div>
                 </div>
 
                 <div class="col-12">
                     <label for="newPassword" class="form-label">New Password</label>
                     <input type="password" name="new_password" class="form-control" id="newPassword" placeholder="New Password" required>
-  
-                    @error('new_password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    
-                    <div class="invalid-feedback">Please enter your password!</div>
                   </div>
 
                   <div class="col-12">
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                    <input type="password" name="password_confirmation" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
-  
-                    @error('password_confirmation')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    
-                    <div class="invalid-feedback">Please enter your password!</div>
+                    <input type="password" name="new_password_confirmation" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
                   </div>
 
                 <div class="col-12">
