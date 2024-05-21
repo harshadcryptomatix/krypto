@@ -27,18 +27,14 @@
           <table class="table datatable">
             <thead>
               <tr>
-              <th><b>S No.</b></th>
-              <th><b>First Name</b></th>
-              <th><b>Last Name</b></th>
-              <th><b>Email</b></th>
-              <th> <b>Country</b></th>
-              <th> <b>Default Currency</b></th>
-              <th> <b>Status</b></th>
-
-
-
-                
-                <th>Action</th>
+              <th><b>{{__('S No.')}}</b></th>
+              <th><b>{{__('First Name')}}</b></th>
+              <th><b>{{__('Last Name')}}</b></th>
+              <th><b>{{__('Email')}}</b></th>
+              <th> <b>{{__('Country')}}</b></th>
+              <th> <b>{{__('Default Currency')}}</b></th>
+              <th> <b>{{__('Status')}}</b></th>
+              <th>{{__('Action')}}</th>
               </tr>
             </thead>
             <tbody>
@@ -54,7 +50,7 @@
 
 
                
-                <td><button class="btn btn-success">View</button></td>
+                <td><a href="{{ route('admin.viewapplication',$application->id)}}" class="btn btn-success">{{__('View')}}</a></td>
               </tr>
               @empty
 
