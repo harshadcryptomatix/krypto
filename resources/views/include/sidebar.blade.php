@@ -16,5 +16,11 @@
           <span>{{__('Profile')}}</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link @if (!Request::is('*orders*')) collapsed @endif" href="{{ route('orders')}}">
+        <i class="bi bi-shop-window"></i>
+          <span>{{__('Orders')}}</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
     </ul>
   </aside><!-- End Sidebar-->

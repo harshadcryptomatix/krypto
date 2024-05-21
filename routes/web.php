@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\OrderController;
 
 Route::prefix('admin')->group(function () {
     require base_path('routes/admin.php');
@@ -24,6 +25,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/profile-info', [ApplicationController::class, 'profile_details'])->name('profile.details');
     Route::post('/profile-info-update', [ApplicationController::class, 'profile_save_info'])->name('save-personal-info');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
    
 
 });
