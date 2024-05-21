@@ -84,7 +84,7 @@
                         </span>
                     @enderror
                     
-                    <div class="invalid-feedback">Please enter your password!</div>
+                    {{-- <div class="invalid-feedback">Please enter your password!</div> --}}
                   </div>
                   <div class="col-12">
                     <div class="form-check">

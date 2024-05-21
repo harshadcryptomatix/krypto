@@ -5,7 +5,6 @@
         <div class="d-flex align-items-center justify-content-between">
         <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
-            {{-- <span class="d-none d-lg-block">Krypto</span> --}}
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -71,6 +70,13 @@
                 <hr class="dropdown-divider">
                 </li> --}}
 
+                <li>
+                    <a href="{{ route('account-settitngs.page') }}" class="dropdown-item d-flex align-items-center">
+                        <i class="bi bi-gear"></i>
+                        Settings
+                    </a>
+                </li>
+                
                 <li>
                 @if(Auth::guard('admin')->check())    
                     <form action="{{ route('admin.logout') }}" method="POST" class="form-inline">

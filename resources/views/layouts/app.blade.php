@@ -15,8 +15,12 @@
         @include('include.styles')
         
         @stack('styles')
-        
-        
+
+        <style>
+            #main{
+                min-height:calc(100vh - 125px);
+            }
+        </style>
     </head>
     <body>
 
@@ -25,11 +29,7 @@
             @include('include.sidebar')
         @endif
 
-        
-        <div id="app">
-            @yield('content')
-        </div>
-
+        @yield('content')
         
         @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
             @include('include.footer')
