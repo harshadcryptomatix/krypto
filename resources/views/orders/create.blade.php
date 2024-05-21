@@ -83,7 +83,6 @@ function convertCurrencyToCrypto() {
         $("#submit_order").attr('disabled',false);
         return;
     }
-
     fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${currency}`)
         .then(response => {
             $("#submit_order").attr('disabled',false);
@@ -99,7 +98,7 @@ function convertCurrencyToCrypto() {
                 const result = amount / conversionRate;
                 document.getElementById('crypto-amount').value = `${result.toFixed(8)}`;
             } else {
-                document.getElementById('crypto-amount').value = 'Error';
+                document.getElementById('crypto-amount').value = '0.00';
             }
         })
         .catch(error => {
