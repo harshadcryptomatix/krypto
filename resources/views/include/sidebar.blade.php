@@ -16,11 +16,5 @@
           <span>{{__('Profile')}}</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
-      
-
-      
-
     </ul>
-
   </aside><!-- End Sidebar-->
