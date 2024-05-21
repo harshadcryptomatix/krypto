@@ -49,12 +49,20 @@ class RegisterController extends Controller
 
     protected function createUser(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'country_code' => $data['country_code'],
             'mobile_no' => $data['mobile_no'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $token_api = $user->createToken(config("app.name"))->plainTextToken;
+
+        \Log::info([$token_api]);
+        $user->update(['api_key' => $token_api]);
+
+        return $user;
+        
     }
 }

@@ -15,8 +15,28 @@
         @include('include.styles')
         
         @stack('styles')
-        
-        
+
+        <style>
+            .sidebar {
+                position: relative; 
+                min-height: 100vh;
+                width: 300px;
+                float: left;
+                top: 0;
+                margin-right: 50px;
+            }
+            .header {
+                height: 60px;
+                position:sticky;
+            }
+            .footer {
+                bottom: 0;
+                margin-left: 300px;
+                position: absolute;
+                width: 100%;
+                right: 0;
+            }
+        </style>
     </head>
     <body>
 

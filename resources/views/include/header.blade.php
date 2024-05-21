@@ -72,6 +72,13 @@
                 </li> --}}
 
                 <li>
+                    <a href="{{ route('account-settitngs.page') }}" class="dropdown-item d-flex align-items-center">
+                        <i class="bi bi-gear"></i>
+                        Settings
+                    </a>
+                </li>
+                
+                <li>
                 @if(Auth::guard('admin')->check())    
                     <form action="{{ route('admin.logout') }}" method="POST" class="form-inline">
                 @else
