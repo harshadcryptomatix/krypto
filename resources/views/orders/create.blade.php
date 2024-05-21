@@ -18,7 +18,7 @@
                     <h5 class="card-title"></h5>
                     <form method="post" action="{{ route('orders.store')}}" class="row g-3 needs-validation" novalidate>
                         @csrf
-                        <div class="col-5">
+                        <div class="col-3">
                             <div class="input-group mb-3">
                                 <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter Amount" style="width: 70%;" required>
                                 <select class="form-control input-group-text" id="currency" name="currency">
@@ -28,10 +28,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-2" style="text-align: center;font-size: 31px;">
+                        <div class="col-1" style="text-align: center;font-size: 31px;">
                             <i class="ri-exchange-fill"></i>
                         </div>
-                        <div class="col-5">
+                        <div class="col-3">
                             <div class="input-group mb-3">
                                 <input name="converted_amount" type="text" value="0.00" class="form-control" id="crypto-amount" placeholder="Crypto Amount" style="width: 70%; background: #e9ecef;" readonly required>
                                 <select class="form-control input-group-text" id="crypto" name="crypto_currency">
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 text-center">
+                        <div class="col-12">
                             <button class="btn btn-primary" id="submit_order" type="submit">Submit</button>
                         </div>
                     </form>
