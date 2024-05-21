@@ -1,21 +1,26 @@
 @extends('layouts.app')
 @section('content')
   <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>{{__('Orders')}}</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Home')}}</a></li>
-          <li class="breadcrumb-item active">{{__('Orders List')}}</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+    <div class="row">
+
+      <div class="pagetitle col-6">
+        <h1>{{__('Orders')}}</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item active">{{__('Orders List')}}</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+      
+      <div class="col-6">
+        <a style="float: right;" href="{{route('orders.create')}}" class="btn btn-primary">Create</a>
+  </div>
+      
+    </div>
 
     <section class="section">
           <div class="row">
-                <div class="col-12 mb-4">
-                      <a style="float: right;" href="{{route('orders.create')}}" class="btn btn-primary">Create</a>
-                </div>
                  <div class="col-12">
                     <div class="card">
                     <div class="card-body">

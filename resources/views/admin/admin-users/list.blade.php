@@ -1,13 +1,21 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="pagetitle">
-      <h1>{{__('Admin List')}}</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Home')}}</a></li>
-          <li class="breadcrumb-item active">{{__('Admin List')}}</li>
-        </ol>
-      </nav>
+    <div class="pagetitle row">
+
+      <div class="col-md-6">
+        <h1>{{__('Admin List')}}</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item active">{{__('Admin List')}}</li>
+          </ol>
+        </nav>
+      </div>
+      
+      <div class="col-md-6">
+        <a href="{{route('admin.admin-create')}}" class="btn btn-primary admin-button">Add Admin</a>
+      </div>
+      
     </div><!-- End Page Title -->
     <section class="section">
     @if (session()->has('error'))
@@ -25,9 +33,7 @@
                     </div>
                 @endif
       <div class="row">
-        <div class="col-12">
-              <a href="{{route('admin.admin-create')}}" class="btn btn-primary admin-button">Add Admin</a>
-        </div>
+        
         <div class="col-lg-12">
         
           <div class="card">

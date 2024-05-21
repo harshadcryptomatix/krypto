@@ -9,7 +9,7 @@
 
             <div class="card-body">
               
-              <div class="pt-4 pb-2">
+              <div class="pt-2 pb-2">
                 <h5 class="card-title pb-0 fs-4">Change Password</h5>
 
                 @if($errors->any())
