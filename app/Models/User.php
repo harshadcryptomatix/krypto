@@ -54,5 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyEmail);
     }
+    // Define the hasOne relationship with the Application model
+    public function application()
+    {
+        return $this->hasOne(Application::class);
+    }
     
 }

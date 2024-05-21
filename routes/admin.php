@@ -38,4 +38,8 @@ Route::middleware(['admin'])->group(function () {
       'edit' => 'admin.admin-edit',
       'update' => 'admin.admin-update'
     ]);
+
+    Route::get('merchant-application/{id}',[ApplicationController::class,'viewApplication'])->name('admin.viewapplication');
+    Route::post('application-status-change/{id}',[ApplicationController::class,'statusUpdate'])->name('admin.application-status-change');
+   
 });

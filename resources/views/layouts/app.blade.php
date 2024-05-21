@@ -57,6 +57,8 @@
 
         @include('include.scripts')
 
+        @yield('scripts')
+
     </body>
 
 </html>
