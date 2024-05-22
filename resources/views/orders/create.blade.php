@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    #con-error{
+          color: red;
+    }
+</style>
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>{{__('Orders')}}</h1>
@@ -20,11 +25,9 @@
                         @csrf
                         <div class="col-3">
                             <div class="input-group mb-3">
-                                <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter Amount" style="width: 70%;" required>
+                                <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter Amount" style="width: 70%;" required min="1">
                                 <select class="form-control input-group-text" id="currency" name="currency">
-                                    @foreach($currencies ?? [] as $key => $value)
-                                        <option value="{{$key}}" @if($default_currency == $key) selected @endif>{{$key}}</option>
-                                    @endforeach
+                                   
                                 </select>
                             </div>
                         </div>
@@ -33,12 +36,11 @@
                         </div>
                         <div class="col-3">
                             <div class="input-group mb-3">
-                                <input name="converted_amount" type="text" value="0.00" class="form-control" id="crypto-amount" placeholder="Crypto Amount" style="width: 70%; background: #e9ecef;" readonly required>
+                                <input name="converted_amount" type="text" value="0.00" class="form-control" id="crypto-amount" placeholder="Crypto Amount" style="width: 70%; background: #e9ecef;" readonly required min="1">
                                 <select class="form-control input-group-text" id="crypto" name="crypto_currency">
-                                    <option value="bitcoin">BTC</option>
-                                    <option value="ethereum">ETH</option>
-                                    <option value="litecoin">LTC</option>
+                                  
                                 </select>
+                                <div id="con-error"></div>
                             </div>
                         </div>
                         <div class="col-12">
@@ -51,7 +53,27 @@
     </section>
 </main>
 @section('scripts')
+<script src="{{asset('assets/js/crypto-convert.min.js')}}"></script>
 <script>
+const convert = new CryptoConvert({
+    cryptoInterval: 15000, // Crypto prices update interval in ms (default 5 seconds on Node.js & 15 seconds on Browsers)
+    fiatInterval: (60 * 1e3 * 60), // Fiat prices update interval (default every 1 hour)
+    calculateAverage: true, // Calculate the average crypto price from exchanges
+    binance: true, // Use binance rates
+    bitfinex: true, // Use bitfinex rates
+    coinbase: true, // Use coinbase rates
+    kraken: true, // Use kraken rates
+    HTTPAgent: null // HTTP Agent for server-side proxies (Node.js only)
+});
+
+async function init() {
+    await convert.ready(); // Wait for the initial cache to load
+}
+// Initialize and run the conversions
+init();
+
+const cache = {};
+
 function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -61,57 +83,67 @@ function debounce(func, wait) {
     };
 }
 
-// Cache to store recent conversion rates
-const conversionCache = {};
-
-function convertCurrencyToCrypto() {
-    $("#submit_order").attr('disabled',true);
-    const amount = parseFloat(document.getElementById('amount').value);
-    const currency = document.getElementById('currency').value.toLowerCase();
-    const crypto = document.getElementById('crypto').value;
-    if (isNaN(amount) || amount <= 0) {
-        document.getElementById('crypto-amount').value = '0.00';
-        $("#submit_order").attr('disabled',false);
-        return;
+async function convertCurrencyToCrypto(fromCurrency, toCurrency, amount) {
+    $("#con-error").html('');
+    const cacheKey = `${fromCurrency}-${toCurrency}-${amount}`;
+    
+    if (cache[cacheKey]) {
+        return cache[cacheKey];
     }
 
-    const cacheKey = `${crypto}_${currency}`;
-    if (conversionCache[cacheKey]) {
-        const conversionRate = conversionCache[cacheKey];
-        const result = amount / conversionRate;
-        document.getElementById('crypto-amount').value = `${result.toFixed(8)}`;
-        $("#submit_order").attr('disabled',false);
-        return;
+    if (convert[fromCurrency.trim()] && convert[fromCurrency.trim()][toCurrency.trim()]) {
+        const result = await convert[fromCurrency][toCurrency](amount);
+        cache[cacheKey] = result; // Store the result in cache
+        return result;
+    } else {
+        $("#con-error").html(`Conversion from ${fromCurrency} to ${toCurrency} is not supported.`);
+        throw new Error(`Conversion from ${fromCurrency} to ${toCurrency} is not supported.`);
     }
-    fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${currency}`)
-        .then(response => {
-            $("#submit_order").attr('disabled',false);
-            if (response.status === 429) {
-                throw new Error('Too Many Requests');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data[crypto] && data[crypto][currency]) {
-                const conversionRate = data[crypto][currency];
-                conversionCache[cacheKey] = conversionRate; // Cache the conversion rate
-                const result = amount / conversionRate;
-                document.getElementById('crypto-amount').value = `${result.toFixed(8)}`;
-            } else {
-                document.getElementById('crypto-amount').value = '0.00';
-            }
-        })
-        .catch(error => {
-            document.getElementById('crypto-amount').value = 'Try Sometime';
-            console.error('Error fetching conversion rate:', error);
-        });
 }
 
-const debouncedConvertCurrencyToCrypto = debounce(convertCurrencyToCrypto, 500);
+const debouncedConvert = debounce(async function() {
+    try {
+        $("#crypto-amount").val(0.00);
+        const amount = $("#amount").val();
+        const currency = $("#currency").val();
+        const crypto = $("#crypto").val();
+        const converted_amount = await convertCurrencyToCrypto(currency, crypto, Number(amount));
+        (typeof converted_amount) == 'number' ? $("#crypto-amount").val(converted_amount) : 0.00;
+        $("#submit_order").attr('disabled', false);
+    } catch (error) {
+        console.error(error.message);
+    }
+}, 500);
 
-document.getElementById('amount').addEventListener('input', debouncedConvertCurrencyToCrypto);
-document.getElementById('currency').addEventListener('change', convertCurrencyToCrypto);
-document.getElementById('crypto').addEventListener('change', convertCurrencyToCrypto);
+$('#amount, #currency, #crypto').on('input change keyup', function() {
+    $("#submit_order").attr('disabled', true);
+    debouncedConvert();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    var default_currency = "{{$default_currency}}";
+
+    const cryptoDropdown = document.getElementById('crypto');
+    const fiatDropdown = document.getElementById('currency');
+
+    convert.list.crypto.forEach(crypto => {
+        const option = document.createElement('option');
+        option.value = crypto;
+        option.textContent = crypto;
+        cryptoDropdown.appendChild(option);
+    });
+
+    convert.list.fiat.forEach(fiat => {
+        const option = document.createElement('option');
+        if (default_currency == fiat) {
+            option.selected = true;
+        }
+        option.value = fiat;
+        option.textContent = fiat;
+        fiatDropdown.appendChild(option);
+    });
+});
+
 </script>
 @endsection
 @endsection
