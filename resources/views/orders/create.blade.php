@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+    #con-error{
+          color: red;
+    }
+</style>
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>{{__('Orders')}}</h1>
@@ -35,6 +40,7 @@
                                 <select class="form-control input-group-text" id="crypto" name="crypto_currency">
                                   
                                 </select>
+                                <div id="con-error"></div>
                             </div>
                         </div>
                         <div class="col-12">
@@ -61,10 +67,12 @@ const convert = new CryptoConvert({
 });
 
 async function init() {
-    await convert.ready(); // Wait for the initial cache to load    
+    await convert.ready(); // Wait for the initial cache to load
 }
 // Initialize and run the conversions
 init();
+
+const cache = {};
 
 function debounce(func, wait) {
     let timeout;
@@ -76,20 +84,25 @@ function debounce(func, wait) {
 }
 
 async function convertCurrencyToCrypto(fromCurrency, toCurrency, amount) {
-   
-    if (convert[fromCurrency] && convert[fromCurrency][toCurrency]) {
+    $("#con-error").html('');
+    const cacheKey = `${fromCurrency}-${toCurrency}-${amount}`;
+    
+    if (cache[cacheKey]) {
+        return cache[cacheKey];
+    }
+
+    if (convert[fromCurrency.trim()] && convert[fromCurrency.trim()][toCurrency.trim()]) {
         const result = await convert[fromCurrency][toCurrency](amount);
+        cache[cacheKey] = result; // Store the result in cache
         return result;
     } else {
-     
+        $("#con-error").html(`Conversion from ${fromCurrency} to ${toCurrency} is not supported.`);
         throw new Error(`Conversion from ${fromCurrency} to ${toCurrency} is not supported.`);
     }
 }
 
 const debouncedConvert = debounce(async function() {
-   
     try {
-       
         $("#crypto-amount").val(0.00);
         const amount = $("#amount").val();
         const currency = $("#currency").val();
@@ -102,9 +115,9 @@ const debouncedConvert = debounce(async function() {
     }
 }, 500);
 
-$('#amount, #currency, #crypto').on('input change keyup', function(){
+$('#amount, #currency, #crypto').on('input change keyup', function() {
     $("#submit_order").attr('disabled', true);
-    debouncedConvert()
+    debouncedConvert();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -122,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     convert.list.fiat.forEach(fiat => {
         const option = document.createElement('option');
-        if(default_currency == fiat){
+        if (default_currency == fiat) {
             option.selected = true;
         }
         option.value = fiat;
@@ -130,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fiatDropdown.appendChild(option);
     });
 });
+
 </script>
 @endsection
 @endsection
