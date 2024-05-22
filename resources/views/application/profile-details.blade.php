@@ -5,36 +5,68 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>{{__('Profile Details')}}</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Home')}}</a></li>
-          <li class="breadcrumb-item active">{{__('Profile Details')}}</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+    <div class="row">
+        
+        <div class="pagetitle col-6">
+          <h1>{{__('Profile Details')}}</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('Profile Details')}}</li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-               @if (session()->has('error'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-octagon me-1"></i>
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                @endif
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <i class="bi bi-check-circle me-1"></i>
-                      {{ session('success') }}
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="col-6 text-end">
+            <a href="{{route('profile.details')}}?update=true" class="btn btn-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
+        </div>
+
+    </div>
+
+    <section class="section profile">
+       @if (session()->has('error'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <i class="bi bi-check-circle me-1"></i>
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        <div class="row">
+            <!-- <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                      <h2>Kevin Anderson</h2>
+                      <h3>Web Designer</h3>
+                      <div class="social-links mt-2">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                      </div>
                     </div>
-                @endif
+
+                </div>
+            </div> -->
+            <div class="col-xl-12">
 
                 <div class="card">
                         <div class="card-body pt-3">
+                            <div class="tab-content pt-2">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
                          <h5 class="card-title">{{__('Profile Details')}}</h5>
-                         <a href="{{route('profile.details')}}?update=true" class="btn btn-primary margin-left-94"><i class="bi bi-pencil-fill"></i> Edit</a>
 
                         <div class="row">
                         <div class="col-lg-3 col-md-4 label ">{{__('First Name')}}</div>
@@ -87,8 +119,15 @@
                             <div class="col-lg-3 col-md-4 label">{{__('Status')}}</div>
                             <div class="col-lg-9 col-md-8">{{$data->status}}</div>
                         </div>
+
+                    </div>
+                </div>
+
                        </div>
                 </div>
+
+            </div>
+        </div>
     </section>
 
   </main><!-- End #main -->
