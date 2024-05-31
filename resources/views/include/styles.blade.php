@@ -16,5 +16,9 @@
 <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+<!-- select 2 css -->
+<link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
+
 <!-- Template Main CSS File -->
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">

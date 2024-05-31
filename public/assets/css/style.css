@@ -390,6 +390,9 @@ h6 {
   min-width: 360px;
   padding: 0 20px;
 }
+.ml-12{
+    margin-left: 12px;
+}
 
 @media (max-width: 1199px) {
   .header .search-bar {
@@ -1222,4 +1225,34 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+.invalid-feedback{
+     display: block;
+}
+.margin-left-94{
+    margin-left: 94%;
+}
+/* Target the main container */
+.select2-container .select2-selection--single {
+  height: 55px !important;
+  display: flex;
+  align-items: center; /* Center the text vertically */
+}
+
+/* Adjust the rendered selection */
+.select2-container .select2-selection--single .select2-selection__rendered {
+  line-height: 55px !important;
+}
+
+/* Ensure the dropdown arrow is vertically centered */
+.select2-container .select2-selection--single .select2-selection__arrow {
+  height: 52px !important; /* Slightly less to align within the borders */
+  line-height: 52px !important;
+}
+/* Custom styles for invalid and valid select2 */
+.select2-container--default .select2-selection--single.is-invalid {
+  border-color: #dc3545;
+}
+.select2-container--default .select2-selection--single.is-valid {
+  border-color: #28a745;
 }

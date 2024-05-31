@@ -15,20 +15,29 @@
         @include('include.styles')
         
         @stack('styles')
-        
-        
+
+        <style>
+            #main{
+                min-height:calc(100vh - 125px);
+            }
+        </style>
     </head>
     <body>
 
         @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
             @include('include.header')
+            @include('include.sidebar')
         @endif
-        
-        <div id="app">
-            @yield('content')
-        </div>
 
-    @include('include.footer')
+        @yield('content')
+        
+        @if (Auth::guard('admin')->check() || Auth::guard('web')->check())
+            @include('include.footer')
+        @endif
+
+        @include('include.scripts')
+
+        @yield('scripts')
 
     </body>
 

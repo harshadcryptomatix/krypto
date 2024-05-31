@@ -1,0 +1,15 @@
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary{
+	background-color: #4F738E !important;
+	border-color: #4F738E !important;
+	color: #FFFFFF !important;
+}
+
+a,
+a:hover,
+.card-title,
+.pagetitle h1,
+.footer .copyright{
+/*	color: #4F738E !important;*/
+}
