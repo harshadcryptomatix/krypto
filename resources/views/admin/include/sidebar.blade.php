@@ -42,6 +42,20 @@
           </li>
         </ul>
       </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link @if (!Request::is('*orders*')) collapsed @endif" data-bs-target="#applications-nav2" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Orders </span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="applications-nav2" class="nav-content collapse @if(Request::is('*orders*')) show @endif" data-bs-parent="#sidebar-nav">
+          <li>
+            
+            <a href="{{route('admin.orders.index')}}" @if (Request::is('*orders*')) class="active"  @endif>
+              <i class="bi bi-circle"></i><span>Orders</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
       
     </ul>
 

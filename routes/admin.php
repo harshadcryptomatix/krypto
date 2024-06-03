@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\MerchantController;
 use App\Http\Controllers\Admin\ApplicationController;
+use App\Http\Controllers\Admin\OrderController;
 
 
 
@@ -41,5 +42,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('merchant-application/{id}',[ApplicationController::class,'viewApplication'])->name('admin.viewapplication');
     Route::post('application-status-change/{id}',[ApplicationController::class,'statusUpdate'])->name('admin.application-status-change');
+
+    Route::get('orders',[OrderController::class,'index'])->name('admin.orders.index');
    
 });

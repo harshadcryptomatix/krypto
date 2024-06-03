@@ -1,7 +1,5 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('content')
-  <main id="main" class="main">
-    <div class="row">
 
       <div class="pagetitle col-6">
         <h1>{{__('Orders')}}</h1>
@@ -14,7 +12,7 @@
       </div><!-- End Page Title -->
       
       <div class="col-6">
-        <a style="float: right;" href="{{route('orders.create')}}" class="btn btn-primary">Create</a>
+        <!-- <a style="float: right;" href="{{route('orders.create')}}" class="btn btn-primary">Create</a> -->
   </div>
       
     </div>
@@ -31,6 +29,7 @@
                     <thead>
                     <tr>
                     <th scope="col">{{__('Orders No')}}</th>
+                    <th scope="col">{{__('Customer Name')}}</th>
                     <th scope="col">{{__('Name')}}</th>
                     <th scope="col">{{__('Email')}}</th>
                     <th scope="col">{{__('status')}}</th>
@@ -47,10 +46,11 @@
 
                     @forelse($orders as $order)
                     <tr>
+
                     <th scope="row">{{ $order->order_id }}</th>
+                    <td>{{ $order->user->name  }}</td>
                     <td>{{ $order->first_name.' '.$order->last_name  }}</td>
                     <td>{{ $order->email }} <span class="badge text-bg-warning">{{ $order->ip_address }}</span></td>
-
                     <td>
                         <span class="badge {{ $order->status == 0 ? 'text-bg-danger' : 'text-bg-success' }}">
                             {{ $order->status == 0 ? 'Failed' : 'Success' }}
@@ -76,5 +76,5 @@
                  </div>
           </div>
    </section>
-  </main> 
+
   @endsection
