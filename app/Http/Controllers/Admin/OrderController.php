@@ -19,5 +19,8 @@ class OrderController extends Controller
             ->paginate(10);
         return view('admin.order.index', compact('orders'));
     }
-
+    public function show($id)
+    {
+        return Transaction::findOrFail($id);
+    }
 }

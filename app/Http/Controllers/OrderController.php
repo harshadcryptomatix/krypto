@@ -23,7 +23,7 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $orders = Transaction::where('user_id', Auth::id())->select('order_id','first_name','last_name','ip_address','email','status','amount','country','currency','transaction_date')->latest()->paginate(10);
+        $orders = Transaction::where('user_id', Auth::id())->select('id','order_id','first_name','last_name','ip_address','email','status','amount','country','currency','transaction_date')->latest()->paginate(10);
         return view('orders.index', compact('orders'));
     }
 
@@ -91,4 +91,9 @@ class OrderController extends Controller
 
 
     }
+    public function show($id)
+    {
+        return Transaction::where(['id' => $id,'user_id' => Auth::id()])->first();
+    }
+    
 }

@@ -25,5 +25,6 @@
 
     <!-- jquery -->
     <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}" ></script>
+    <script src="{{ asset('assets/js/common.js')}}"></script>
 
 @stack('scripts')

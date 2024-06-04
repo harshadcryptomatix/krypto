@@ -44,5 +44,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('application-status-change/{id}',[ApplicationController::class,'statusUpdate'])->name('admin.application-status-change');
 
     Route::get('orders',[OrderController::class,'index'])->name('admin.orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+
    
 });
